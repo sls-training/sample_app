@@ -1,0 +1,18 @@
+inherit_from:
+  - https://raw.githubusercontent.com/timedia/styleguide/master/ruby/rubocop/base.yml
+  - https://raw.githubusercontent.com/timedia/styleguide/master/ruby/rubocop/rails.yml
+
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    - bin/**/*
+    - config/*
+    - config/environments/*
+    - db/**/*
+    - node_modules/**/*
+    - vendor/**/*
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Documentation:
+  Enabled: false

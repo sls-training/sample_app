@@ -16,7 +16,9 @@ group :development, :test do
   gem 'solargraph', require: false
   gem 'rubocop', '~> 0.83', require: false
   gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
+  gem 'rubocop-rails', require: false # Rails プロジェクトのみ
+  gem 'rubocop-rspec', require: false # テストに RSpec を利用するプロジェクトのみ
+  gem 'spring-commands-rspec'
 end
 
 group :development do
@@ -35,6 +37,12 @@ group :test do
   gem 'minitest-reporters',       '1.3.8'
   gem 'guard',                    '2.16.2'
   gem 'guard-minitest',           '2.4.6'
+  # チュートリアルに無し
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'database_cleaner'
+  gem 'launchy'
 end
 
 group :production do

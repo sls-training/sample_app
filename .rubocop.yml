@@ -1,6 +1,8 @@
 inherit_from:
   - https://raw.githubusercontent.com/timedia/styleguide/master/ruby/rubocop/base.yml
   - https://raw.githubusercontent.com/timedia/styleguide/master/ruby/rubocop/rails.yml
+  # 以下は RSpec 利用時のみ
+  - https://raw.githubusercontent.com/timedia/styleguide/master/ruby/rubocop/rspec.yml
 
 AllCops:
   TargetRubyVersion: 2.7

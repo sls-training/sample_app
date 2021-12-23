@@ -21,4 +21,11 @@ RSpec.describe 'ViewPageTest' do
       expect(page).to have_title 'About | Ruby on Rails Tutorial Sample App'
     end
   end
+
+  describe 'Contact' do
+    specify 'タイトル内容の表示' do
+      visit '/static_pages/contact'
+      expect(page).to have_title 'Contact | Ruby on Rails Tutorial Sample App'
+    end
+  end
 end

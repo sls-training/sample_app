@@ -20,6 +20,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false # Rails プロジェクトのみ
   gem 'rubocop-rspec', require: false # テストに RSpec を利用するプロジェクトのみ
   gem 'spring-commands-rspec'
+  gem 'pry-byebug'
 end
 
 group :development do
@@ -44,6 +45,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'guard-rspec', require: false
+
 end
 
 group :production do

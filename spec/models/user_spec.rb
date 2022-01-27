@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { FactoryBot.build(:user, name: 'Example User', email: 'user@example.com') }
+  let(:user) { FactoryBot.build(:user, name: 'Example User', email: 'user@example.com', password: 'foobar', password_confirmation: 'foobar') }
 
   it '有効か' do
     expect(user).to be_valid
@@ -61,5 +61,15 @@ RSpec.describe User, type: :model do
     user.save
     user.reload
     expect(user.email).to eq user.email.downcase
+  end
+
+  it 'パスワードが空ではない' do
+    user.password = user.password_confirmation = ' ' * 6
+    expect(user).not_to be_valid
+  end
+
+  it 'パスワードの長さが6文字以上' do
+    user.password = user.password_confirmation = 'a' * 5
+    expect(user).not_to be_valid
   end
 end

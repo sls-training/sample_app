@@ -44,7 +44,7 @@ RSpec.describe 'SignUpPage', type: :request do
       expect(response).to redirect_to User.last
       follow_redirect!
       expect(response).to render_template :show
-      expect(response.body).to include('Welcome to the Sample App!')
+      expect(flash[:success]).to be_truthy
     end
   end
 end

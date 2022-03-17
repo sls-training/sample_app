@@ -45,6 +45,11 @@ RSpec.describe 'LoginPage', type: :request do
         expect(response.body).to include(logout_path)
         expect(response.body).to include(user_path)
       end
+
+      it 'ログイン状態であること' do
+        subject
+        expect(is_logged_in?).to be_truthy
+      end
     end
   end
 end

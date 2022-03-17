@@ -43,7 +43,7 @@ RSpec.describe 'LoginPage', type: :request do
         subject
         follow_redirect!
         expect(response.body).to include(logout_path)
-        expect(response.body).to include(user_path)
+        expect(response.body).to include(user_path(testuser))
       end
 
       it 'ログイン状態であること' do

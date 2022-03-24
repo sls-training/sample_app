@@ -53,4 +53,20 @@ RSpec.describe 'LoginPage', type: :request do
       end
     end
   end
+
+  describe 'チェックボックスのテスト' do
+    context 'チェックボックスにチェックがついている場合' do
+      it 'Cookieに保存すること' do
+        log_in_as(testuser)
+        expect(cookies[:remember_token]).not_to eq nil
+      end
+    end
+
+    context 'チェックボックスにチェックがついていない場合' do
+      it 'Cookieに保存しないこと' do
+        log_in_as(testuser, remember_me: '0')
+        expect(cookies[:remember_token]).to eq nil
+      end
+    end
+  end
 end

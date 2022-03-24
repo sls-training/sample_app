@@ -42,6 +42,7 @@ RSpec.describe 'LoginPage', type: :request do
         get login_path
         subject
         follow_redirect!
+        expect(response).to have_http_status(:ok)
         expect(response.body).to include(logout_path)
         expect(response.body).to include(user_path(testuser))
       end

@@ -20,6 +20,7 @@ RSpec.describe 'ログアウトテスト', type: :request do
       expect(response.body).to include(login_path)
       expect(response.body).not_to include(logout_path)
       expect(response.body).not_to include(user_path(testuser))
+      expect(is_logged_in?).to be_falsey
     end
   end
 end

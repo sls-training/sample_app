@@ -2,14 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'EditPage', type: :request do
   let(:testuser) { FactoryBot.create(:user, :michael) }
+  let(:other_user) { FactoryBot.create(:user, { name: 'Sterling Archer' }) }
 
   describe 'GET EDIT TEST' do
     context 'ログインしている場合' do
-      before do
-        post login_path, params: { session: { email: testuser.email, password: testuser.password } }
-      end
-
       it '編集ページにアクセスできること' do
+        log_in_as(testuser)
         get edit_user_path(testuser)
         expect(response).to have_http_status(:ok)
       end
@@ -28,6 +26,24 @@ RSpec.describe 'EditPage', type: :request do
         expect(response).to have_http_status(:ok)
       end
     end
+
+    context '別のユーザーの場合' do
+      before do
+        log_in_as(other_user)
+      end
+
+      it 'フラッシュメッセージが表示されていないこと' do
+        get edit_user_path(testuser)
+        expect(flash).to be_empty
+      end
+
+      it 'root_urlにリダイレクトされること' do
+        get edit_user_path(testuser)
+        redirect_to root_path
+        follow_redirect!
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe 'PATCH EDIT TEST' do
@@ -35,7 +51,7 @@ RSpec.describe 'EditPage', type: :request do
       subject { patch user_path(testuser), params: { user: { name: '', email: 'foo@invalid', password: 'foo', password_confirmation: 'bar' } } }
 
       before do
-        post login_path, params: { session: { email: testuser.email, password: testuser.password } }
+        log_in_as(testuser)
       end
 
       it 'editページが再描写されること' do
@@ -59,7 +75,7 @@ RSpec.describe 'EditPage', type: :request do
       end
 
       before do
-        post login_path, params: { session: { email: testuser.email, password: testuser.password } }
+        log_in_as(testuser)
       end
 
       it 'flashメッセージが表示されていること' do
@@ -93,6 +109,23 @@ RSpec.describe 'EditPage', type: :request do
       it 'ログインページにリダイレクトされること' do
         patch user_path(testuser), params: { user: { name: testuser.name, email: testuser.email } }
         redirect_to login_path
+        follow_redirect!
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context '別のユーザーの場合' do
+      before do
+        log_in_as(other_user)
+        patch user_path(testuser), params: { user: { name: testuser.name, email: testuser.email } }
+      end
+
+      it 'フラッシュメッセージが表示されていないこと' do
+        expect(flash).to be_empty
+      end
+
+      it 'root_urlにリダイレクトされること' do
+        redirect_to root_path
         follow_redirect!
         expect(response).to have_http_status(:ok)
       end

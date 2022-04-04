@@ -25,6 +25,29 @@ RSpec.describe 'EditPage', type: :request do
         follow_redirect!
         expect(response).to have_http_status(:ok)
       end
+
+      context 'フレンドリーフォワーディング' do
+        it 'ログインしたら編集ページにリダイレクトされること' do
+          get edit_user_path(testuser)
+          log_in_as(testuser)
+          redirect_to edit_user_path(testuser)
+          follow_redirect!
+          expect(response).to have_http_status(:ok)
+        end
+
+        it '次回以降のログイン時、転送先のURLはデフォルトに戻っていること' do
+          get edit_user_path(testuser)
+          expect(session[:forwarding_url]).to eq "http://www.example.com#{edit_user_path(testuser)}"
+          log_in_as(testuser)
+          redirect_to edit_user_path(testuser)
+          expect(session[:forwarding_url]).to eq nil
+          delete logout_path
+          log_in_as(testuser)
+          redirect_to user_path(testuser)
+          follow_redirect!
+          expect(response).to have_http_status(:ok)
+        end
+      end
     end
 
     context '別のユーザーの場合' do

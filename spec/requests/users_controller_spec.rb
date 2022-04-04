@@ -7,4 +7,11 @@ RSpec.describe UsersController, type: :request do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  describe 'Index' do
+    it 'ログインしていなければログインページにリダイレクト' do
+      get users_path
+      redirect_to login_path
+    end
+  end
 end

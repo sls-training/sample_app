@@ -153,15 +153,5 @@ RSpec.describe 'EditPage', type: :request do
         expect(response).to have_http_status(:ok)
       end
     end
-
-    context 'Web経由でadmin属性変更のリクエストが送られた場合' do
-      it 'admin属性が変更されないこと' do
-        log_in_as(other_user)
-        expect(testuser).not_to be_admin
-        patch user_path(other_user), params: { user: { password: 'password', password_confirmation: 'password', admin: true } }
-        testuser.reload
-        expect(testuser).not_to be_admin
-      end
-    end
   end
 end

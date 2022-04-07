@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'UsersPage', type: :request do
-  let(:testuser) { FactoryBot.create(:user, :michael) }
-  let(:adminuser) { FactoryBot.create(:admin) }
-  let(:other_user) { FactoryBot.create(:user, { name: 'Sterling Archer' }) }
+  let!(:testuser) { FactoryBot.create(:user, :michael) }
+  let!(:adminuser) { FactoryBot.create(:admin) }
+  let!(:other_user) { FactoryBot.create(:user, { name: 'Sterling Archer' }) }
 
   describe 'ページネーションテスト' do
     before do
@@ -26,11 +26,8 @@ RSpec.describe 'UsersPage', type: :request do
 
   describe 'DELETEテスト' do
     context '未ログインの場合' do
-
       it '削除されないこと' do
-        # expect { delete(user_path(adminuser)) }.to change(User, :count).by(0)
-        delete user_path(adminuser)
-        expect(User.count).to eq 0
+        expect { delete user_path(adminuser) }.not_to change(User, :count)
       end
 
       it 'ログイン画面にリダイレクトされること' do
@@ -45,7 +42,7 @@ RSpec.describe 'UsersPage', type: :request do
       end
 
       it '削除されないこと' do
-        expect { delete(user_path(adminuser)) }.to change(User, :count).by(0)
+        expect { delete user_path(adminuser) }.not_to change(User, :count)
       end
 
       it 'ホーム画面にリダイレクトされること' do
@@ -63,6 +60,9 @@ RSpec.describe 'UsersPage', type: :request do
     context 'adminアカウントでログインした場合' do
       before do
         log_in_as(adminuser)
+        redirect_to users_path
+        follow_redirect!
+        expect(response).to have_http_status(:ok)
       end
 
       it 'deleteリンクが表示されていること' do
@@ -70,7 +70,7 @@ RSpec.describe 'UsersPage', type: :request do
       end
 
       it '削除できること' do
-        expect { delete(user_path(other_user)) }.to change(User, :count).by(-1)
+        expect { delete user_path(other_user) }.to change(User, :count).by(-1)
       end
     end
   end

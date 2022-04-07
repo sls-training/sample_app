@@ -23,7 +23,7 @@ FactoryBot.define do
 
   factory :many_user, class: 'User' do
     sequence(:name) { |n| "User #{n}" }
-    sequence(:email) { |n| "user_#{n}@example.com" }
+    sequence(:email) { |n| "manyuser_#{n}@example.com" }
     password { 'password' }
     password_confirmation { 'password' }
   end

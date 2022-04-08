@@ -74,6 +74,6 @@ RSpec.describe User, type: :model do
   end
 
   it 'ダイジェストがnilのユーザーにはfalseを返す' do
-    expect(user.authenticated?('')).to be_falsey
+    expect(user.authenticated?(:remember, '')).to be_falsey
   end
 end

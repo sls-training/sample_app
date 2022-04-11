@@ -74,4 +74,23 @@ RSpec.describe 'UsersPage', type: :request do
       end
     end
   end
+
+  describe 'ユーザー一覧' do
+    context 'activeされていない場合' do
+      it 'ユーザー一覧に表示されないこと' do
+        not_activated_user = FactoryBot.create(:user, :john)
+        log_in_as(testuser)
+        get users_path
+        expect(User.all).not_to include not_activated_user.name
+      end
+
+      it 'rootページにリダイレクトされること' do
+        not_activated_user = FactoryBot.create(:user, :john)
+        log_in_as(testuser)
+        get user_path(not_activated_user)
+        redirect_to root_path
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
 end

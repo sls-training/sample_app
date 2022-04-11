@@ -13,6 +13,13 @@ FactoryBot.define do
       password { 'password' }
       password_confirmation { 'password' }
     end
+
+    trait :john do
+      name { 'John Example' }
+      email { 'john@example.com' }
+      password { 'password' }
+      password_confirmation { 'password' }
+    end
   end
 
   factory :admin, class: 'User' do

@@ -69,4 +69,55 @@ RSpec.describe 'LoginPage', type: :request do
       end
     end
   end
+
+  describe 'アカウントアクティベーション' do
+    before do
+      post users_path, params: { user: {
+        name:                  'Example User',
+        email:                 'user@example.com',
+        password:              'password',
+        password_confirmation: 'password'
+      } }
+      @user = controller.instance_variable_get('@user')
+    end
+
+    context '有効化トークンが正しい場合' do
+      it 'activeになること' do
+        get edit_account_activation_path(@user.activation_token, email: @user.email)
+        @user.reload
+        expect(@user).to be_activated
+      end
+
+      it 'ユーザーページが表示されていること' do
+        get edit_account_activation_path(@user.activation_token, email: @user.email)
+        @user.reload
+        expect(@user).to be_activated
+        redirect_to user_path(@user)
+        follow_redirect!
+        expect(response).to have_http_status(:ok)
+        expect(is_logged_in?).to be_truthy
+      end
+    end
+
+    context 'トークンは正しいがメールアドレスが無効な場合' do
+      it 'ログインできないこと' do
+        get edit_account_activation_path(@user.activation_token, email: 'wrong')
+        expect(is_logged_in?).to be_falsey
+      end
+    end
+
+    context '有効化トークンが不正な場合' do
+      it 'ログインできないこと' do
+        get edit_account_activation_path('invalid token', email: @user.email)
+        expect(is_logged_in?).to be_falsey
+      end
+    end
+
+    context '有効化していない場合' do
+      it 'ログインできないこと' do
+        log_in_as(@user)
+        expect(is_logged_in?).to be_falsey
+      end
+    end
+  end
 end

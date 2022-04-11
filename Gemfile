@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'bcrypt', '3.1.11'
+gem 'bcrypt'
 gem 'bootsnap', '1.4.5', require: false
 gem 'bootstrap-sass', '3.3.7'
 gem 'bootstrap-will_paginate', '1.0.0'

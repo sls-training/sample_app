@@ -22,4 +22,15 @@ RSpec.describe Micropost, type: :model do
     micropost.content = 'a' * 141
     expect(micropost).not_to be_valid
   end
+
+  it '最新の投稿が最初に来ること' do
+    FactoryBot.send(:user_with_posts)
+    expect(FactoryBot.create(:most_recent)).to eq Micropost.first
+  end
+
+  it 'ユーザーが削除されたとき、関連するマイクロポストも削除されること' do
+    post = FactoryBot.create(:most_recent)
+    user = post.user
+    expect { user.destroy }.to change(Micropost, :count).by(-1)
+  end
 end

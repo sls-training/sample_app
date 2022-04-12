@@ -1,5 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe Micropost, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:testuser) { FactoryBot.create(:user, :michael) }
+  let(:micropost) { Micropost.new(content: 'Lorem ipsum', user_id: testuser.id) }
+
+  it '有効であること' do
+    expect(micropost).to be_valid
+  end
+
+  it 'ユーザーIDが存在すること' do
+    micropost.user_id = nil
+    expect(micropost).not_to be_valid
+  end
+
+  it 'コンテンツが存在すること' do
+    micropost.content = '   '
+    expect(micropost).not_to be_valid
+  end
+
+  it 'コンテンツの文字数が最大140文字であること' do
+    micropost.content = 'a' * 141
+    expect(micropost).not_to be_valid
+  end
 end

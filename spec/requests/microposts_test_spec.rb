@@ -30,7 +30,22 @@ RSpec.describe 'Microposts', type: :request do
 
       it 'ログインページにリダイレクトされること' do
         delete micropost_path(@micropost)
-        expect(response).to redirect_to login_path
+        redirect_to login_path
+      end
+    end
+
+    context '別のユーザーの場合' do
+      before do
+        log_in_as(testuser)
+      end
+
+      it '削除されないこと' do
+        expect { delete micropost_path(@micropost) }.not_to change(Micropost, :count)
+      end
+
+      it 'ホームページにリダイレクトされること' do
+        delete micropost_path(@micropost)
+        redirect_to root_path
       end
     end
   end

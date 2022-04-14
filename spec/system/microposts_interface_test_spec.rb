@@ -7,10 +7,11 @@ RSpec.describe 'MicropostsInterfaceTest', type: :system do
     @user.password = 'password'
     log_in_as(@user)
     get root_path
+    expect(response).to have_http_status(:ok)
   end
 
   it 'ページネーションのラッパータグがあること' do
-    expect(page).to have_selector 'div#pagination'
+    expect(page).to have_selector('div', class: 'pagination')
   end
 
   context '無効な送信の場合' do

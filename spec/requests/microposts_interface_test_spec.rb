@@ -15,6 +15,10 @@ RSpec.describe 'MicropostsInterfaceTest', type: :request do
     expect(response.body).to include('<div role="navigation" aria-label="Pagination" class="pagination">')
   end
 
+  it '画像アップロードボタンがあること' do
+    expect(response.body).to include('<input type="file" name="micropost[image]" id="micropost_image" />')
+  end
+
   context '無効な送信の場合' do
     it '投稿されないこと' do
       expect { post microposts_path, params: { micropost: { content: '' } } }.not_to change(Micropost, :count)

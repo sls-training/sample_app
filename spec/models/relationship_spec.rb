@@ -27,6 +27,7 @@ RSpec.describe Relationship, type: :model do
 
       it 'フォローできること' do
         test_user.follow(other_user)
+        expect(other_user.followers.include?(test_user)).to be_truthy
         expect(test_user.following?(other_user)).to be_truthy
       end
     end

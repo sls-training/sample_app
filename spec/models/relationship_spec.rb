@@ -18,4 +18,29 @@ RSpec.describe Relationship, type: :model do
     relationship.followed_id = nil
     expect(relationship).not_to be_valid
   end
+
+  describe 'フォロー＆フォロー解除' do
+    context 'まだフォローしていない場合' do
+      it 'フォローしていないこと' do
+        expect(test_user.following?(other_user)).to be_falsy
+      end
+
+      it 'フォローできること' do
+        test_user.follow(other_user)
+        expect(test_user.following?(other_user)).to be_truthy
+      end
+    end
+
+    context 'フォローしている場合' do
+      before do
+        test_user.follow(other_user)
+        expect(test_user.following?(other_user)).to be_truthy
+      end
+
+      it 'フォロー解除できること' do
+        test_user.unfollow(other_user)
+        expect(test_user.following?(other_user)).to be_falsey
+      end
+    end
+  end
 end

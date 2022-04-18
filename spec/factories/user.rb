@@ -51,6 +51,13 @@ FactoryBot.define do
     created_at { Time.zone.now }
     user { association :user, email: 'recent@example.com' }
   end
+
+  factory :continuous_users, class: 'User' do
+    sequence(:name) { |n| "User #{n}" }
+    sequence(:email) { |n| "user-#{n}@example.com" }
+    password { 'password' }
+    password_confirmation { 'password' }
+  end
 end
 
 def user_with_posts(posts_count: 5)

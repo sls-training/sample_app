@@ -19,6 +19,35 @@ RSpec.describe 'ViewPageTest', type: :request do
     it 'タイトルがbase_titleの内容ではない' do
       expect(response.body).not_to include(" | #{base_title} ")
     end
+
+    it 'followingとfollowersが正しく表示されること' do
+      user = FactoryBot.send(:create_relationships)
+      log_in_as user
+      redirect_to root_path
+      follow_redirect!
+      expect(response.body).to include("
+        <strong id=\"following\" class=\"stat\">
+            10
+        </strong>
+        ")
+      expect(response.body).to include("
+        <strong id=\"followers\" class=\"stat\">
+            10
+        </strong>
+        ")
+
+      get user_path(user)
+      expect(response.body).to include("
+        <strong id=\"following\" class=\"stat\">
+            10
+        </strong>
+        ")
+      expect(response.body).to include("
+        <strong id=\"followers\" class=\"stat\">
+            10
+        </strong>
+        ")
+    end
   end
 
   describe 'Help' do

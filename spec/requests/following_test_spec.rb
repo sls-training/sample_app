@@ -62,5 +62,17 @@ RSpec.describe 'MicropostsInterfaceTest', type: :request do
       relationship = test_user.active_relationships.find_by(followed_id: other_user.id)
       expect { delete relationship_path(relationship), xhr: true }.to change(Relationship, :count).by(-1)
     end
+
+    context 'ホームページのフィード' do
+      before do
+        get root_path
+      end
+
+      it 'マイクロポストのコンテンツが含まれていること' do
+        test_user.feed.paginate(page: 1).each do |micropost|
+          expect(response.body).to match(CGI.escapeHTML(micropost.content))
+        end
+      end
+    end
   end
 end

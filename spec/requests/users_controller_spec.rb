@@ -29,4 +29,26 @@ RSpec.describe UsersController, type: :request do
       end
     end
   end
+
+  describe 'following/followers' do
+    let(:test_user) { FactoryBot.create(:user, :michael) }
+
+    context 'GET /users/{id}/following' do
+      it '未ログインならログインページにリダイレクトすること' do
+        get following_user_path(test_user)
+        redirect_to login_path
+        follow_redirect!
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'GET /users/{id}/followers' do
+      it '未ログインならログインページにリダイレクトすること' do
+        get followers_user_path(test_user)
+        redirect_to login_path
+        follow_redirect!
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
 end

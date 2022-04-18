@@ -25,28 +25,12 @@ RSpec.describe 'ViewPageTest', type: :request do
       log_in_as user
       redirect_to root_path
       follow_redirect!
-      expect(response.body).to include("
-        <strong id=\"following\" class=\"stat\">
-            10
-        </strong>
-        ")
-      expect(response.body).to include("
-        <strong id=\"followers\" class=\"stat\">
-            10
-        </strong>
-        ")
+      expect(response.body).to include('<strong id="following" class="stat">')
+      expect(response.body).to include('<strong id="followers" class="stat">')
 
       get user_path(user)
-      expect(response.body).to include("
-        <strong id=\"following\" class=\"stat\">
-            10
-        </strong>
-        ")
-      expect(response.body).to include("
-        <strong id=\"followers\" class=\"stat\">
-            10
-        </strong>
-        ")
+      expect(response.body).to include('<strong id="following" class="stat">')
+      expect(response.body).to include('<strong id="followers" class="stat">')
     end
   end
 

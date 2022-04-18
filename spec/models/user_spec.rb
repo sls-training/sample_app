@@ -76,4 +76,28 @@ RSpec.describe User, type: :model do
   it 'ダイジェストがnilのユーザーにはfalseを返す' do
     expect(user.authenticated?(:remember, '')).to be_falsey
   end
+
+  describe '#feed' do
+    let(:test_user2) { FactoryBot.create(:user, :michael) }
+    let(:test_user3) { FactoryBot.create(:user, name: 'lana') }
+    let(:test_user4) { FactoryBot.create(:user, name: 'archer') }
+
+    it 'フォローしているユーザの投稿が表示されること' do
+      test_user3.microposts.each do |post_following|
+        expect(test_user2.feed.include?(post_following)).to be_truthy
+      end
+    end
+
+    it '自分自身の投稿が表示されること' do
+      test_user2.microposts.each do |post_self|
+        expect(test_user2.feed.include?(post_self)).to be_truthy
+      end
+    end
+
+    it 'フォローしていないユーザの投稿は表示されないこと' do
+      test_user4.microposts.each do |post_unfollowed|
+        expect(test_user2.feed.include?(post_unfollowed)).to be_falsey
+      end
+    end
+  end
 end

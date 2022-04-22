@@ -73,9 +73,9 @@
 #### レスポンスサンプル
 ```
 {
-  "error": [
-    "status": 404
+  "error": {
+    "status": 404,
     "message": "not found"
-  ]
+  }
 }
 ```

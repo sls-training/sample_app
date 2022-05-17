@@ -1,4 +1,5 @@
 class Api::ErrorRenderController < ApplicationController
+  # DBからデータを取得するときに、存在しないデータだった場合
   rescue_from ActiveRecord::RecordNotFound, with: :status_404
 
   private

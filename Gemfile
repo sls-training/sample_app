@@ -15,6 +15,7 @@ gem 'sass-rails', '5.1.0'
 gem 'turbolinks', '5.2.0'
 gem 'webpacker',  '4.0.7'
 gem 'will_paginate', '3.3.1'
+gem 'rack-cors' # CORSの設定をする
 
 group :development, :test do
   gem 'byebug', '11.0.1', platforms: %i[mri mingw x64_mingw]
@@ -28,6 +29,7 @@ group :development, :test do
   gem 'rubocop-rspec', require: false # テストに RSpec を利用するプロジェクトのみ
   gem 'solargraph', require: false
   gem 'spring-commands-rspec'
+  gem 'pry-rails'
 end
 
 group :development do

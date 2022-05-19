@@ -139,14 +139,14 @@
 
 #### 失敗時
 ##### ステータスコード
-- 404
+- 401
 
 #### レスポンスサンプル
 ```
 {
   "error": {
-    "status": 404,
-    "message": "not found"
+    "status": 401,
+    "message": "Unauthorized"
   }
 }
 ```

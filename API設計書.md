@@ -5,7 +5,7 @@
 ### 概要
 - ユーザーのマイクロポストを返すAPI
   - 認証用APIで返ってきたものを使って認証する
-    - getリクエストでユーザーのマイクロポストのデータを持ってくる際に、headerで送った認証用のtokenがuser tableのauth_digestに存在するかを確認する
+    - getリクエストでユーザーのマイクロポストのデータを持ってくる際に、headerで送った認証用のtokenがuser tableのauth_tokenに存在するかを確認する
 		- その後、そのtokenの有効期限が切れていないかをexpiration_dateの時刻と比較する
 	- tokenが存在し、有効期限も大丈夫だった場合にマイクロポストを取得する処理に入る
 	- tokenが存在しなかった場合、有効期限が切れていた場合はエラーを返す
@@ -111,8 +111,8 @@ Authorization: xxxxxx
 - メールアドレスとパスワードを受け取り、そのユーザーがDBに存在すれば成功、存在しなければ失敗を返す
   - 成功
 	  - tokenとして長さ22のランダムなbase64文字列を生成する
-	  - userid:tokenの形をbase64エンコードしたものを返す
-		  - user tableのauth_digestにbase64エンコードしたものを保存する
+	  - userid:tokenの形をbase64エンコードしたものと、有効期限の時刻を返す
+		  - user tableのauth_tokenにbase64エンコードしたものを保存する
 		  - user tableのexpiration_dateに有効期限として成功時の時刻から30分後の時刻を保存する
   - 失敗
 	  - 401エラーを返す
@@ -139,7 +139,8 @@ Authorization: xxxxxx
 ##### レスポンスサンプル
 ```
 {
-    "auth": "MTAxOkd2dDdEMGR6bXFhNFlnZ0pmLVNST2c="
+    "auth": "MTAxOkd2dDdEMGR6bXFhNFlnZ0pmLVNST2c=",
+    "expiration_date": "2022-05-24 12:54:12 +0900"
 }
 ```
 

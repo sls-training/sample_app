@@ -1,7 +1,6 @@
 # API 設計書
 
 ## ユーザーのマイクロポストを返す API
-
 ### 概要
 
 - ユーザーのマイクロポストを返す API
@@ -60,37 +59,37 @@ Authorization: xxxxxx
 
 ```
 {
-	"microposts": [
-		{
-			"id": 295,
-			"content": "Possimus facilis repellat odit dolore.",
-			"user_id": 1,
-			"created_at": "2022-04-18T07:54:54.387Z",
-			"updated_at": "2022-04-18T07:54:54.387Z"
-		},
-		{
-			"id": 289,
-			"content": "Ut voluptatem sed expedita nam.",
-			"user_id": 1,
-			"created_at": "2022-04-18T07:54:54.362Z",
-			"updated_at": "2022-04-18T07:54:54.362Z"
-		},
-		{
-			"id": 283,
-			"content": "Sequi et voluptas quod beatae.",
-			"user_id": 1,
-			"created_at": "2022-04-18T07:54:54.338Z",
-			"updated_at": "2022-04-18T07:54:54.338Z"
-		},
+  "microposts": [
+    {
+      "id": 295,
+      "content": "Possimus facilis repellat odit dolore.",
+      "user_id": 1,
+      "created_at": "2022-04-18T07:54:54.387Z",
+      "updated_at": "2022-04-18T07:54:54.387Z"
+    },
+    {
+      "id": 289,
+      "content": "Ut voluptatem sed expedita nam.",
+      "user_id": 1,
+      "created_at": "2022-04-18T07:54:54.362Z",
+      "updated_at": "2022-04-18T07:54:54.362Z"
+    },
+    {
+      "id": 283,
+      "content": "Sequi et voluptas quod beatae.",
+      "user_id": 1,
+      "created_at": "2022-04-18T07:54:54.338Z",
+      "updated_at": "2022-04-18T07:54:54.338Z"
+    },
   ~~~~ # 省略
-		{
-			"id": 121,
-			"content": "Cumque possimus ipsa quaerat non.",
-			"user_id": 1,
-			"created_at": "2022-04-18T07:54:53.645Z",
-			"updated_at": "2022-04-18T07:54:53.645Z"
-		}
-	]
+    {
+      "id": 121,
+      "content": "Cumque possimus ipsa quaerat non.",
+      "user_id": 1,
+      "created_at": "2022-04-18T07:54:53.645Z",
+      "updated_at": "2022-04-18T07:54:53.645Z"
+    }
+  ]
 }
 ```
 
@@ -164,8 +163,8 @@ Authorization: xxxxxx
 
 ```
 {
-    "auth": "MTAxOkd2dDdEMGR6bXFhNFlnZ0pmLVNST2c=",
-    "expiration_date": "2022-05-24 12:54:12 +0900"
+  "auth": "MTAxOkd2dDdEMGR6bXFhNFlnZ0pmLVNST2c=",
+  "expiration_date": "2022-05-24 12:54:12 +0900"
 }
 ```
 

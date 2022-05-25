@@ -164,7 +164,7 @@ Authorization: xxxxxx
 ```
 {
   "auth": "MTAxOkd2dDdEMGR6bXFhNFlnZ0pmLVNST2c=",
-  "expiration_date": "2022-05-24 12:54:12 +0900"
+  "expiration_date": "2022-05-24 12:54:12"
 }
 ```
 

@@ -17,7 +17,7 @@ class Api::V1::AuthController < Api::ErrorRenderController
       user.save
       render json: { "success": { "auth": auth, "expiration_date": date.to_s(:db) } }
     else
-      render json: { "error": { "status": 401, "message": 'Unauthorized' } }
+      render status: 401, json: { "error": { "status": 401, "message": 'Unauthorized' } }
     end
   end
 end

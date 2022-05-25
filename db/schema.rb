@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_15_032025) do
+ActiveRecord::Schema.define(version: 2022_05_24_044135) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 2022_04_15_032025) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.string "auth_token"
+    t.datetime "expiration_date"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

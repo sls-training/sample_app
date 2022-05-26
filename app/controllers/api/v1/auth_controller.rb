@@ -13,14 +13,10 @@ class Api::V1::AuthController < Api::ErrorRenderController
       # user tableのexpiration_atに有効期限（現在時刻から30分後）を入れる
       date = Time.now.since(30.minutes)
       user.expiration_at = date
-      # DBの変更を保存する際、user.save!をチェックし、例外が発生しなければjsonを返す
-      begin
-        user.save!
-      rescue => e
-        puts e.message
-      else
-        render json: { "success": { "auth": auth, "expiration_at": date.iso8601 } }
-      end
+      # DBの変更を保存する
+      user.save!
+      render json: { "success": { "auth": auth, "expiration_at": date.iso8601 } }
+
     else
       render status: 401, json: { "error": { "status": 401, "message": 'Unauthorized' } }
     end

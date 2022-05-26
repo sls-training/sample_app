@@ -15,10 +15,10 @@ class Api::V1::AuthController < Api::ErrorRenderController
       user.expiration_at = date
       # DBの変更を保存する
       user.save!
-      render json: { "success": { "auth": auth, "expiration_at": date.iso8601 } }
+      render json: { success: { auth: auth, expiration_at: date.iso8601 } }
 
     else
-      render status: 401, json: { "error": { "status": 401, "message": 'Unauthorized' } }
+      render status: 401, json: { error: { status: 401, message: 'Unauthorized' } }
     end
   end
 end

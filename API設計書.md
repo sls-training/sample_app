@@ -7,7 +7,7 @@
 
   - 認証用 API で返ってきたものを使って認証する
     - get リクエストでユーザーのマイクロポストのデータを持ってくる際に、header で送った認証用の token が user table の auth_token に存在するかを確認する
-    - その後、その token の有効期限が切れていないかを expiration_date の時刻と比較する
+    - その後、その token の有効期限が切れていないかを expiration_at の時刻と比較する
   - token が存在し、有効期限も大丈夫だった場合にマイクロポストを取得する処理に入る
   - token が存在しなかった場合、有効期限が切れていた場合はエラーを返す
 
@@ -100,7 +100,7 @@ Authorization: xxxxxx
   "microposts": []
 }
 ```
-
+ƒ
 #### 失敗時
 
 ##### ステータスコード
@@ -130,7 +130,7 @@ Authorization: xxxxxx
     - token として長さ 22 のランダムな base64 文字列を生成する
     - userid:token の形を base64 エンコードしたものと、有効期限の時刻を返す
       - user table の auth_token に base64 エンコードしたものを保存する
-      - user table の expiration_date に有効期限として成功時の時刻から 30 分後の時刻を保存する
+      - user table の expiration_at に有効期限として成功時の時刻から 30 分後の時刻を保存する
   - 失敗
     - 401 エラーを返す
 

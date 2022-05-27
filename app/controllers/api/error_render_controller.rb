@@ -5,6 +5,6 @@ class Api::ErrorRenderController < ApplicationController
   private
 
   def status_404(_error)
-    render json: { "error": { "status": 404, "message": 'not found' } }
+    render status: 404, json: { error: { status: 404, message: 'not found' } }
   end
 end

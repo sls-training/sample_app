@@ -100,7 +100,7 @@ Authorization: xxxxxx
   "microposts": []
 }
 ```
-ƒ
+
 #### 失敗時
 
 ##### ステータスコード

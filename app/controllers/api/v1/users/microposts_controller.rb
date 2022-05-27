@@ -9,7 +9,7 @@ module Api
           # リクエストヘッダーを探す
           user_token = User.find_by(auth_token:header)
           if user_token != nil
-            if Time.now <= user_token.expiration_at.in_time_zone('Tokyo')
+            if Time.current.in_time_zone('Tokyo') <= user_token.expiration_at.in_time_zone('Tokyo')
               @user = User.find(params[:user_id]) # ユーザーIDの指定
               @page = params[:page] # ページネーションのページの指定。指定がなければ1
               @per_page = params[:per_page] || 30 # マイクロポストの表示数を指定。指定がなければ30

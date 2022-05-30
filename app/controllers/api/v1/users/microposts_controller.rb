@@ -2,7 +2,6 @@ module Api
   module V1
     module Users
       class MicropostsController < Api::ErrorRenderController
-
         def index
           # リクエストヘッダーを取得
           header = request.headers[:Authorization]
@@ -22,7 +21,6 @@ module Api
             render status: 401, json: { error: { status: 401, message: 'トークンが存在しません' } }
           end
         end
-
       end
     end
   end

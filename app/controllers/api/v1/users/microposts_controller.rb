@@ -4,11 +4,11 @@ module Api
       class MicropostsController < Api::ErrorRenderController
         def index
           # リクエストヘッダーを取得
-          header = request.headers[:Authorization]
+          auth_token = request.headers[:Authorization]
           # リクエストヘッダーを探す
-          user_token = User.find_by(auth_token:header)
-          if user_token != nil
-            if Time.current <= user_token.expiration_at
+          login_user = User.find_by(auth_token:auth_token)
+          if login_user != nil
+            if Time.current <= login_user.expiration_at
               @user = User.find(params[:user_id]) # ユーザーIDの指定
               @page = params[:page] # ページネーションのページの指定。指定がなければ1
               @per_page = params[:per_page] || 30 # マイクロポストの表示数を指定。指定がなければ30

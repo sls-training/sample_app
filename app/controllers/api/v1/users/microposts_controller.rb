@@ -13,7 +13,7 @@ module Api
               @page = params[:page] # ページネーションのページの指定。指定がなければ1
               @per_page = params[:per_page] || 30 # マイクロポストの表示数を指定。指定がなければ30
               @microposts = @user.microposts.paginate(page: @page, per_page: @per_page)
-              render json: {microposts: @microposts, token: header}
+              render json: {microposts: @microposts}
             else
               render status: 401, json: { error: { status: 401, message: '有効期限が切れています' } }
             end
